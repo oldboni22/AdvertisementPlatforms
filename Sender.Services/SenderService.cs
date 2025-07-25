@@ -8,7 +8,7 @@ using Shared;
 
 namespace Sender.Services;
 
-public class SenderServiceService(IPortManager portManager, IAesService aes, 
+public class SenderService(IPortManager portManager, IAesService aes, 
     ILogger? logger) : ISenderService
 {
     private readonly IAesService _aes = aes;
