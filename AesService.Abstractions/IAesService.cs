@@ -2,6 +2,6 @@
 
 public interface IAesService
 {
-    string EncryptString(string input, out byte[] iv);
-    string DecryptString(string input, byte[] iv);
+    Task<(string encrypted,string iv)> EncryptStringAsync(string input);
+    Task<string> DecryptStringAsync(string input, string iv);
 }

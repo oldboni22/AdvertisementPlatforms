@@ -7,10 +7,10 @@ public class AesService(string stringKey) : IAesService
 {
     private readonly byte[] _key = Convert.FromBase64String(stringKey);
     
-    public string EncryptString(string input, out byte[] iv)
+    public async Task<(string encrypted,string iv)> EncryptStringAsync(string input)
     {
         var bytes = RandomNumberGenerator.GetBytes(16);
-        iv = bytes;
+        var iv = bytes;
 
         byte[] encrypted;
         
@@ -23,11 +23,11 @@ public class AesService(string stringKey) : IAesService
 
             using (var memStream = new MemoryStream())
             {
-                using (var cryptoStream = new CryptoStream(memStream,encryptor,CryptoStreamMode.Write))
+                await using (var cryptoStream = new CryptoStream(memStream,encryptor,CryptoStreamMode.Write))
                 {
-                    using (var writer = new StreamWriter(cryptoStream))
+                    await using (var writer = new StreamWriter(cryptoStream))
                     {
-                        writer.Write(input);
+                        await writer.WriteAsync(input);
                     }
                 }
 
@@ -35,27 +35,27 @@ public class AesService(string stringKey) : IAesService
             }
         }
 
-        return Convert.ToBase64String(encrypted);
+        return (Convert.ToBase64String(encrypted), Convert.ToBase64String(iv));
     }
 
-    public string DecryptString(string input, byte[] iv)
+    public async Task<string> DecryptStringAsync(string input, string iv)
     {
         var bytes = Convert.FromBase64String(input);
         
         using (var myAes = Aes.Create())
         {
             myAes.Key = _key;
-            myAes.IV = iv;
+            myAes.IV = Convert.FromBase64String(iv);
 
             var decryptor = myAes.CreateDecryptor();
 
             using (var memStream = new MemoryStream(bytes))
             {
-                using (var cryptoStream = new CryptoStream(memStream,decryptor,CryptoStreamMode.Read))
+                await using (var cryptoStream = new CryptoStream(memStream,decryptor,CryptoStreamMode.Read))
                 {
                     using (var reader = new StreamReader(cryptoStream))
                     {
-                        return reader.ReadToEnd();
+                        return await reader.ReadToEndAsync();
                     }
                 }
             }
