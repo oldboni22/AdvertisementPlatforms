@@ -17,6 +17,8 @@ public class FeedService(IFeedData feedData, IAesService aes,
     private readonly IAesService _aes = aes;
     private readonly IFeedData _feedData = feedData;
     private readonly ILogger? _logger = logger;
+
+    private ConcurrentDictionary<string, GetResultBody> _cached = new();
     
     public async Task WriteData(string serializedData)
     {
@@ -61,6 +63,7 @@ public class FeedService(IFeedData feedData, IAesService aes,
 
             var frozen = dict.ToFrozenDictionary();
 
+            _cached = new();
             _feedData.WriteData(frozen);
         }
         catch (Exception ex)
@@ -82,11 +85,15 @@ public class FeedService(IFeedData feedData, IAesService aes,
             if (result == null)
                 return default;
 
-            var serialized = await Task.Run(() => JsonSerializer.Serialize(result));
+            if (_cached.TryGetValue(query, out var value) is false)
+            {
+                var serialized = await Task.Run(() => JsonSerializer.Serialize(result));
+                var output = await _aes.EncryptStringAsync(serialized);
 
-            var output = await _aes.EncryptStringAsync(serialized);
-
-            return new GetResultBody(output.encrypted, output.iv);
+                value = new GetResultBody(output.encrypted, output.iv);
+            }
+            
+            return value;
         }
         catch (Exception ex)
         {
