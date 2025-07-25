@@ -16,4 +16,9 @@ public class PortManager(string address) : IPortManager
     {
         await _client.PostAsJsonAsync("feed", body);
     }
+
+    public async ValueTask DisposeAsync()
+    {
+        await Task.Run(_client.Dispose);
+    }
 }

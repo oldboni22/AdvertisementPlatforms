@@ -3,13 +3,13 @@ using AesService.Abstractions;
 using Domain;
 using Microsoft.Extensions.Logging;
 using PortManager.Abstractions;
-using Sender.Abstractions;
+using Sender.Services.Abstractions;
 using Shared;
 
 namespace Sender.Services;
 
-public class Sender(IPortManager portManager, IAesService aes, 
-    ILogger? logger) : ISender
+public class SenderServiceService(IPortManager portManager, IAesService aes, 
+    ILogger? logger) : ISenderService
 {
     private readonly IAesService _aes = aes;
     private readonly ILogger? _logger = logger;

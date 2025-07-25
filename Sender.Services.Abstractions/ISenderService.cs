@@ -1,8 +1,8 @@
 ﻿using Domain;
 
-namespace Sender.Abstractions;
+namespace Sender.Services.Abstractions;
 
-public interface ISender
+public interface ISenderService 
 {
     Task SendPlatformListAsync(IEnumerable<Platform> platforms);
 }
