@@ -3,9 +3,9 @@ using AesService.Abstractions;
 
 namespace AesService;
 
-public class AesService(string keyPath) : IAesService
+public class AesService(string stringKey) : IAesService
 {
-    private readonly byte[] _key = File.ReadAllBytes(keyPath);
+    private readonly byte[] _key = Convert.FromBase64String(stringKey);
     
     public string EncryptString(string input, out byte[] iv)
     {
