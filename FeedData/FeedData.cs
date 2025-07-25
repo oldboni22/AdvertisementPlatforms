@@ -7,7 +7,7 @@ namespace FeedData;
 
 public class FeedData(ILogger logger) : IFeedData
 {
-    private static ConcurrentDictionary<string, IEnumerable<string>> _cached = new();
+    private ConcurrentDictionary<string, IEnumerable<string>> _cached = new();
     
     private readonly ILogger? _logger = logger;
     
