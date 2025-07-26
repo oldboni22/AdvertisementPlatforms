@@ -24,11 +24,6 @@ public class FeedService(IFeedData feedData, IAesService aes,
     {
         try
         {
-            if (string.IsNullOrEmpty(serializedData))
-            {
-                throw new ArgumentNullException();
-            }
-
             var deserialized = await Task.Run(() => JsonSerializer.Deserialize<UpdateRequestBody>(serializedData));
 
             var data = await _aes.DecryptStringAsync
@@ -55,7 +50,11 @@ public class FeedService(IFeedData feedData, IAesService aes,
                 Distinct().
                 ForAll(loc =>
                 {
-                    var suitable = array.Where(pl => loc.Contains(pl.Location)).Select(pl => pl.Name).ToArray();
+                    var suitable = array.
+                        Where(pl => loc.
+                        Contains(pl.Location)).
+                        Select(pl => pl.Name).
+                        ToArray();
 
                     dict.TryAdd(loc, suitable);
                 }
@@ -75,9 +74,6 @@ public class FeedService(IFeedData feedData, IAesService aes,
 
     public async Task<GetResultBody>? GetPlatforms(string query)
     {
-        if (string.IsNullOrEmpty(query))
-            return default;
-        
         try
         {
             var result = _feedData.GetPlatforms(query);
@@ -91,6 +87,8 @@ public class FeedService(IFeedData feedData, IAesService aes,
                 var output = await _aes.EncryptStringAsync(serialized);
 
                 value = new GetResultBody(output.encrypted, output.iv);
+
+                _cached.TryAdd(query, value);
             }
             
             return value;

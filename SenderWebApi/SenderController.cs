@@ -12,9 +12,9 @@ public class SenderController(ISenderService senderService) : Controller
     
     [HttpPost]
     [RequestSizeLimit(500_000_000)]
-    public async Task<IActionResult> SendDataAsync([FromBody] List<Platform> platforms)
+    public async Task<IActionResult> SendDataAsync([FromBody] string serializedPlatforms)
     {
-        await _senderService.SendPlatformListAsync(platforms);
+        await _senderService.SendPlatformListAsync(serializedPlatforms);
         return Ok();
     }
 }

@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3"/>
+        <PackageReference Include="Serilog" Version="4.3.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+        <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\AesService.Abstractions\AesService.Abstractions.csproj" />
+        <ProjectReference Include="..\AesService\AesService.csproj" />
+        <ProjectReference Include="..\Domain\Domain.csproj" />
+        <ProjectReference Include="..\Feed.Services.Abstractions\Feed.Services.Abstractions.csproj" />
+        <ProjectReference Include="..\Feed.Services\Feed.Services.csproj" />
+        <ProjectReference Include="..\FeedData\FeedData.csproj" />
+        <ProjectReference Include="..\PortManager.Abstractions\PortManager.Abstractions.csproj" />
+        <ProjectReference Include="..\PortManager\PortManager.csproj" />
+        <ProjectReference Include="..\Sender.Services.Abstractions\Sender.Services.Abstractions.csproj" />
+        <ProjectReference Include="..\Sender.Services\Sender.Services.csproj" />
+    </ItemGroup>
+</Project>

@@ -5,11 +5,11 @@ using Microsoft.Extensions.Logging;
 
 namespace FeedData;
 
-public class FeedData(ILogger logger) : IFeedData
+public class FeedData(ILogger<FeedData> logger) : IFeedData
 {
     private ConcurrentDictionary<string, IEnumerable<string>> _cached = new();
     
-    private readonly ILogger? _logger = logger;
+    private readonly ILogger<FeedData>? _logger = logger;
     
     private readonly ReaderWriterLockSlim _lock = new();
     private FrozenDictionary<string, string[]> _dictionary = FrozenDictionary<string, string[]>.Empty;

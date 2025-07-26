@@ -17,12 +17,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\AesService.Abstractions\AesService.Abstractions.csproj" />
-      <ProjectReference Include="..\AesService\AesService.csproj" />
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\PortManager.Abstractions\PortManager.Abstractions.csproj" />
-      <ProjectReference Include="..\PortManager\PortManager.csproj" />
       <ProjectReference Include="..\Sender.Services.Abstractions\Sender.Services.Abstractions.csproj" />
       <ProjectReference Include="..\Sender.Services\Sender.Services.csproj" />
+      <ProjectReference Include="..\WebApiExtensions\WebApiExtensions.csproj" />
     </ItemGroup>
 
 </Project>

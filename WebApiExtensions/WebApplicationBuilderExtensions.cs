@@ -1,8 +1,8 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Logging;
 using Serilog;
-using Serilog.Core;
-using ILogger = Microsoft.Extensions.Logging.ILogger;
 
-namespace SenderWebApi.Extensions;
+namespace WebApiExtensions;
 
 public static class WebApplicationBuilderExtensions
 {

@@ -1,20 +1,19 @@
 using WebApiExtensions;
 
-namespace SenderWebApi;
+namespace FeedWebApi;
 
 public class Program
 {
     public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        
         builder.ConfigureLogging();
         
-        builder.Services.AddPortManager(builder.Configuration);
         builder.Services.AddAes(builder.Configuration);
         
-        builder.Services.AddSenderService();
-
+        builder.Services.AddFeedData();
+        builder.Services.AddFeedService();
+        
         builder.Services.AddControllers(options =>
         {
             options.Filters.Add<StringValidationFilter>();
@@ -23,9 +22,8 @@ public class Program
         var app = builder.Build();
 
         app.UseHttpsRedirection();
-        
         app.MapControllers();
-        
+
         await app.RunAsync();
     }
 }

@@ -1,12 +1,16 @@
 ﻿using System.Net.Http.Json;
+using Microsoft.Extensions.Logging;
 using PortManager.Abstractions;
 using Shared;
 
 namespace PortManager;
 
-public class PortManager(string address, string route) : IPortManager
+public class PortManager(string address, string route,
+    ILogger<PortManager>? logger = null) : IPortManager
 {
+    private readonly ILogger<PortManager>? _logger = logger;
     private readonly string _route = route;
+    
     private readonly HttpClient _client = new()
     {
         BaseAddress = new Uri(address)
@@ -14,7 +18,14 @@ public class PortManager(string address, string route) : IPortManager
     
     public async Task SendPlatformListAsync(UpdateRequestBody body)
     {
-        await _client.PostAsJsonAsync(_route, body);
+        try
+        {
+            await _client.PostAsJsonAsync(_route, body);
+        }
+        catch (Exception ex)
+        {
+            _logger?.LogError(ex,"An exception occured while sending platform list.");
+        }
     }
 
     public async ValueTask DisposeAsync()

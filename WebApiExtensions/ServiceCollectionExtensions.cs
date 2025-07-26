@@ -1,13 +1,18 @@
 using AesService.Abstractions;
+using Feed.Services;
+using Feed.Services.Abstractions;
+using FeedData.Abstractions;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using PortManager.Abstractions;
 using Sender.Services;
 using Sender.Services.Abstractions;
 
-namespace SenderWebApi.Extensions;
+namespace WebApiExtensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddSender(this IServiceCollection collection)
+    public static void AddSenderService(this IServiceCollection collection)
     {
         collection.AddSingleton<ISenderService, SenderService>();
     }
@@ -33,4 +38,15 @@ public static class ServiceCollectionExtensions
 
         collection.AddSingleton<IAesService>(new AesService.AesService(key));
     }
+
+    public static void AddFeedService(this IServiceCollection collection)
+    {
+        collection.AddSingleton<IFeedService,FeedService>();
+    }
+
+    public static void AddFeedData(this IServiceCollection collection)
+    {
+        collection.AddSingleton<IFeedData, FeedData.FeedData>();
+    }
+    
 }

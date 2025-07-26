@@ -15,17 +15,11 @@ public class SenderService(IPortManager portManager, IAesService aes,
     private readonly ILogger<SenderService>? _logger = logger;
     private readonly IPortManager _portManager = portManager;
     
-    public async Task SendPlatformListAsync(IEnumerable<Platform> platforms)
+    public async Task SendPlatformListAsync(string serializedPlatforms)
     {
-        var asList = platforms.ToList();
-        
-        if(asList.Count == 0)
-            return;
-        
         try
         {
-            var serialized = JsonSerializer.Serialize(asList);
-            var result = await _aes.EncryptStringAsync(serialized);
+            var result = await _aes.EncryptStringAsync(serializedPlatforms);
             
             await _portManager.SendPlatformListAsync(
                 new UpdateRequestBody
