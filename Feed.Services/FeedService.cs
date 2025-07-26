@@ -12,11 +12,11 @@ using Shared;
 namespace Feed.Services;
 
 public class FeedService(IFeedData feedData, IAesService aes,
-    ILogger? logger = null) : IFeedService
+    ILogger<FeedService>? logger = null) : IFeedService
 {
     private readonly IAesService _aes = aes;
     private readonly IFeedData _feedData = feedData;
-    private readonly ILogger? _logger = logger;
+    private readonly ILogger<FeedService>? _logger = logger;
 
     private ConcurrentDictionary<string, GetResultBody> _cached = new();
     

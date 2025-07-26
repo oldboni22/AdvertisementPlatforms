@@ -9,10 +9,10 @@ using Shared;
 namespace Sender.Services;
 
 public class SenderService(IPortManager portManager, IAesService aes, 
-    ILogger? logger) : ISenderService
+    ILogger<SenderService>? logger) : ISenderService
 {
     private readonly IAesService _aes = aes;
-    private readonly ILogger? _logger = logger;
+    private readonly ILogger<SenderService>? _logger = logger;
     private readonly IPortManager _portManager = portManager;
     
     public async Task SendPlatformListAsync(IEnumerable<Platform> platforms)
