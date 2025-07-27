@@ -19,8 +19,8 @@ public class FeedController(IFeedService feedService) : Controller
         return Ok();
     }
 
-    [HttpGet("/{query}")]
-    public async Task<IActionResult> GetDataAsync(string query)
+    [HttpGet]
+    public async Task<IActionResult> GetDataAsync([FromQuery] string query)
     {
         var data = await _feedService.GetPlatforms(query)!; 
         

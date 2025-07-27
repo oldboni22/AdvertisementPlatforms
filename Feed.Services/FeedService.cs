@@ -76,7 +76,8 @@ public class FeedService(IFeedData feedData, IAesService aes,
     {
         try
         {
-            var result = _feedData.GetPlatforms(query);
+            var decodedQuery = Uri.UnescapeDataString(query);
+            var result = _feedData.GetPlatforms(decodedQuery);
 
             if (result == null)
                 return default;

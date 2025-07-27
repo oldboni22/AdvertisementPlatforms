@@ -16,11 +16,21 @@ public class PortManager(string address, string route,
         BaseAddress = new Uri(address)
     };
     
-    public async Task SendPlatformListAsync(UpdateRequestBody body)
+    public async Task SendPlatformListAsync(string serializedUpdateRequestBody)
     {
         try
         {
-            await _client.PostAsJsonAsync(_route, body);
+            var response = await _client.PostAsJsonAsync(_route, serializedUpdateRequestBody);
+
+            if (response.IsSuccessStatusCode)
+            {
+                
+            }
+            else
+            {
+                
+            }
+            
         }
         catch (Exception ex)
         {

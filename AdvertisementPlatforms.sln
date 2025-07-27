@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedWebApi", "FeedWebApi\Fe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiExtensions", "WebApiExtensions\WebApiExtensions.csproj", "{488A3E38-F14B-47C8-AF37-595A89707764}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleProccessor", "ConsoleProccessor\ConsoleProccessor.csproj", "{946DEC72-7181-4775-8BFE-9C52C37AA540}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +104,10 @@ Global
 		{488A3E38-F14B-47C8-AF37-595A89707764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{488A3E38-F14B-47C8-AF37-595A89707764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{488A3E38-F14B-47C8-AF37-595A89707764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{946DEC72-7181-4775-8BFE-9C52C37AA540}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{946DEC72-7181-4775-8BFE-9C52C37AA540}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{946DEC72-7181-4775-8BFE-9C52C37AA540}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{946DEC72-7181-4775-8BFE-9C52C37AA540}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8D39E8B3-E88D-4660-B695-3A0DF22AE7A5} = {A7D3CEDB-630A-4312-99B3-7971F5FC8A07}

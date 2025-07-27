@@ -5,5 +5,5 @@ namespace PortManager.Abstractions;
 
 public interface IPortManager : IAsyncDisposable
 {
-    Task SendPlatformListAsync(UpdateRequestBody body);
+    Task SendPlatformListAsync(string serializedUpdateRequestBody);
 }

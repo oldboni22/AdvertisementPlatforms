@@ -20,14 +20,16 @@ public class SenderService(IPortManager portManager, IAesService aes,
         try
         {
             var result = await _aes.EncryptStringAsync(serializedPlatforms);
+
+            var body = new UpdateRequestBody
+            (
+                result.encrypted,
+                result.iv
+            );
+
+            var serializedBody = JsonSerializer.Serialize(body);
             
-            await _portManager.SendPlatformListAsync(
-                new UpdateRequestBody
-                    (
-                        result.encrypted, 
-                        result.iv
-                    )
-                );
+            await _portManager.SendPlatformListAsync(serializedBody);
 
         }
         catch (Exception ex)
