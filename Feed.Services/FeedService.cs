@@ -72,7 +72,7 @@ public class FeedService(IFeedData feedData, IAesService aes,
         }
     }
 
-    public async Task<GetResultBody>? GetPlatforms(string query)
+    public async Task<GetResultBody> GetPlatforms(string query)
     {
         try
         {

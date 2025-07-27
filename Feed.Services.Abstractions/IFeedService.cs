@@ -2,8 +2,18 @@
 
 namespace Feed.Services.Abstractions;
 
+
 public interface IFeedService
 {
+    #region descriotion
+    /// <param name="serializedData">Serialized update request body.</param>
+    #endregion
     Task WriteData(string serializedData);
-    Task<GetResultBody>? GetPlatforms(string query);
+    
+    
+    #region descriotion
+    /// <returns>Result body, which is serialized list of strings, and an initialization vector.
+    /// If no data matches query, returns default.</returns>
+    #endregion
+    Task<GetResultBody> GetPlatforms(string query);
 }
