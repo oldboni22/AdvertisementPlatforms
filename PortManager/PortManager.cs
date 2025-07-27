@@ -21,16 +21,6 @@ public class PortManager(string address, string route,
         try
         {
             var response = await _client.PostAsJsonAsync(_route, serializedUpdateRequestBody);
-
-            if (response.IsSuccessStatusCode)
-            {
-                
-            }
-            else
-            {
-                
-            }
-            
         }
         catch (Exception ex)
         {

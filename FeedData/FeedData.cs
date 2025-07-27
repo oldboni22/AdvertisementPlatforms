@@ -7,8 +7,6 @@ namespace FeedData;
 
 public class FeedData(ILogger<FeedData> logger) : IFeedData
 {
-    private ConcurrentDictionary<string, List<string>> _cached = new();
-    
     private readonly ILogger<FeedData>? _logger = logger;
     
     private readonly ReaderWriterLockSlim _lock = new();
@@ -20,7 +18,6 @@ public class FeedData(ILogger<FeedData> logger) : IFeedData
         {
             _lock.EnterWriteLock();
             
-            _cached = new();
             _dictionary = dictionary;
             
         }
@@ -41,17 +38,9 @@ public class FeedData(ILogger<FeedData> logger) : IFeedData
         {
             _lock.EnterReadLock();
             
-            if(_cached.TryGetValue(location, out var value) is false)
-            {
-                value = _dictionary.
-                    GetValueOrDefault(location)?.
-                    ToList();
-                
-                if(value != null)
-                    _cached.TryAdd(location, value);
-            }
-            
-            return value;
+            return _dictionary.
+                GetValueOrDefault(location)?.
+                ToList();
         }
         catch (Exception e)
         {
