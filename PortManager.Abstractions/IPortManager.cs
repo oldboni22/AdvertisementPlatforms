@@ -5,5 +5,11 @@ namespace PortManager.Abstractions;
 
 public interface IPortManager : IAsyncDisposable
 {
-    Task SendPlatformListAsync(string serializedUpdateRequestBody);
+    #region Description
+    /// <summary>
+    /// Sends body to the feed service via http.
+    /// </summary>
+    /// <param name="serializedData">Serialized update body.</param>
+    #endregion
+    Task SendPlatformListAsync(string serializedData);
 }

@@ -56,7 +56,7 @@ public class SenderServiceTests
     }
 
     [Test]
-    public async Task SendPlatformListAsync_InvalidInput_DoesNotThrow()
+    public void SendPlatformListAsync_InvalidInput_DoesNotThrow()
     {
         Assert.DoesNotThrowAsync( async () => await _senderService.SendPlatformListAsync("hui"));
     }
