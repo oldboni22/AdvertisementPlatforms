@@ -9,7 +9,7 @@ using Shared;
 namespace Sender.Services;
 
 public class SenderService(IPortManager portManager, IAesService aes, 
-    ILogger<SenderService>? logger) : ISenderService
+    ILogger<SenderService>? logger = null) : ISenderService
 {
     private readonly IAesService _aes = aes;
     private readonly ILogger<SenderService>? _logger = logger;
@@ -28,7 +28,7 @@ public class SenderService(IPortManager portManager, IAesService aes,
             );
 
             var serializedBody = JsonSerializer.Serialize(body);
-            
+
             await _portManager.SendPlatformListAsync(serializedBody);
 
         }
